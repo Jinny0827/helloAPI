@@ -1,0 +1,20 @@
+{
+  "name": "@helloapi/cli",
+  "version": "1.0.0",
+  "description": "CLI scanner for API Spec Explorer",
+  "type": "module",
+  "bin": {
+    "helloapi": "./src/index.ts"
+  },
+  "scripts": {
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@helloapi/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^25.7.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,403 @@
+{
+  "id": "297cb024-1f31-48c6-a6cd-1c8057d61f74",
+  "info": {
+    "title": "src",
+    "description": "C:\\workspace\\bowling-club-management\\backend\\src 에서 자동 생성됨",
+    "version": "1.0.0",
+    "baseUrl": ""
+  },
+  "tags": [
+    "App",
+    "Authentication",
+    "Dashboard",
+    "Games"
+  ],
+  "endpoints": [
+    {
+      "id": "2af026f3-d494-491a-9a78-4d79b62f5215",
+      "method": "GET",
+      "path": "/",
+      "summary": "",
+      "description": "",
+      "tags": [
+        "App"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "OK"
+        }
+      ]
+    },
+    {
+      "id": "456c11e7-e597-4cee-87ee-a9f678ebaf74",
+      "method": "GET",
+      "path": "//health",
+      "summary": "",
+      "description": "",
+      "tags": [
+        "App"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "OK"
+        }
+      ]
+    },
+    {
+      "id": "acfb4ded-cba9-4041-b361-262ac283adcc",
+      "method": "GET",
+      "path": "//db-test",
+      "summary": "",
+      "description": "",
+      "tags": [
+        "App"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "OK"
+        }
+      ]
+    },
+    {
+      "id": "d3e68e10-1308-4832-8727-42f252a2f3f8",
+      "method": "POST",
+      "path": "//auth/register",
+      "summary": "로그인",
+      "description": "이메일과 비밀번호로 로그인합니다.",
+      "tags": [
+        "Authentication"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "로그인 성공"
+        },
+        {
+          "statusCode": "401",
+          "description": "로그인 실패"
+        }
+      ]
+    },
+    {
+      "id": "09c3d65c-9a03-438b-8200-c907cc2ad8c2",
+      "method": "POST",
+      "path": "//auth/login",
+      "summary": "현재 사용자 정보 조회",
+      "description": "JWT 토큰에서 사용자 정보를 바로 반환 (빠른 응답)",
+      "tags": [
+        "Authentication"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "사용자 정보 조회 성공"
+        },
+        {
+          "statusCode": "401",
+          "description": "인증되지 않은 요청"
+        }
+      ]
+    },
+    {
+      "id": "2a4c9850-8f7e-4af9-a05c-87acbf3847a9",
+      "method": "GET",
+      "path": "//auth/me",
+      "summary": "상세 프로필 조회",
+      "description": "DB에서 최신 사용자 정보를 조회 (전화번호, 프로필 이미지 등 포함)",
+      "tags": [
+        "Authentication"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "프로필 조회 성공"
+        },
+        {
+          "statusCode": "401",
+          "description": "인증되지 않은 요청"
+        }
+      ]
+    },
+    {
+      "id": "8911335c-aadd-4cd2-a1f8-7ba0c9b9429e",
+      "method": "GET",
+      "path": "//auth/profile",
+      "summary": "",
+      "description": "",
+      "tags": [
+        "Authentication"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "OK"
+        }
+      ]
+    },
+    {
+      "id": "6ced016d-b4ab-48ff-928f-b1d76aa6b9d5",
+      "method": "GET",
+      "path": "//dashboard/ping",
+      "summary": "",
+      "description": "",
+      "tags": [
+        "Dashboard"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "OK"
+        }
+      ]
+    },
+    {
+      "id": "5136d122-18bc-4050-8c40-5e92274cddcb",
+      "method": "POST",
+      "path": "//dashboard/echo",
+      "summary": "",
+      "description": "",
+      "tags": [
+        "Dashboard"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "OK"
+        }
+      ]
+    },
+    {
+      "id": "a463512a-be9e-4308-9fb6-ef0fa0015edf",
+      "method": "GET",
+      "path": "//dashboard/stats",
+      "summary": "",
+      "description": "",
+      "tags": [
+        "Dashboard"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "OK"
+        }
+      ]
+    },
+    {
+      "id": "fa8af02b-2809-4be4-8e3d-4455ea2ab238",
+      "method": "GET",
+      "path": "//dashboard/clubs",
+      "summary": "",
+      "description": "",
+      "tags": [
+        "Dashboard"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "OK"
+        }
+      ]
+    },
+    {
+      "id": "929b7f11-fd05-4de9-bb91-00b0767e02ad",
+      "method": "POST",
+      "path": "//dashboard/game",
+      "summary": "",
+      "description": "",
+      "tags": [
+        "Dashboard"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "OK"
+        }
+      ]
+    },
+    {
+      "id": "22196f1b-e250-4bbb-8459-863d2498b099",
+      "method": "POST",
+      "path": "/games",
+      "summary": "게임 점수 추가",
+      "description": "기존 게임에 새로운 점수를 추가합니다.",
+      "tags": [
+        "Games"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "201",
+          "description": "게임 점수 추가 성공"
+        }
+      ]
+    },
+    {
+      "id": "73c2460b-0ae4-4c04-80d6-b6e7c74ac364",
+      "method": "POST",
+      "path": "//games/scores",
+      "summary": "내 게임 통계 조회",
+      "description": "현재 사용자의 게임 통계 정보를 조회합니다.",
+      "tags": [
+        "Games"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "게임 통계 조회 성공"
+        }
+      ]
+    },
+    {
+      "id": "5b9d7a67-563f-428c-b531-b924a5ed1b49",
+      "method": "GET",
+      "path": "//games/my-stats",
+      "summary": "내 게임 점수 목록 조회",
+      "description": "현재 사용자의 게임 점수 목록을 페이지네이션으로 조회합니다.",
+      "tags": [
+        "Games"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "게임 점수 목록 조회 성공"
+        }
+      ]
+    },
+    {
+      "id": "60cd4819-3e37-49d1-b2fd-685bc9159d7b",
+      "method": "GET",
+      "path": "//games/my-scores",
+      "summary": "특정 게임의 점수 조회",
+      "description": "게임 ID로 해당 게임의 모든 점수를 조회합니다.",
+      "tags": [
+        "Games"
+      ],
+      "parameters": [],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "게임 점수 상세 조회 성공"
+        }
+      ]
+    },
+    {
+      "id": "ae370664-a15f-4a25-a7f8-cad69889f92e",
+      "method": "GET",
+      "path": "//games/{gameId}/scores",
+      "summary": "클럽별 게임 목록 조회",
+      "description": "특정 클럽의 게임 목록을 페이지네이션으로 조회합니다.",
+      "tags": [
+        "Games"
+      ],
+      "parameters": [
+        {
+          "name": "gameId",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "클럽 게임 목록 조회 성공"
+        }
+      ]
+    },
+    {
+      "id": "95dbf260-c764-4e88-b0fc-e088b2a36efe",
+      "method": "GET",
+      "path": "//games/club/{clubId}",
+      "summary": "게임 점수 수정",
+      "description": "기존 게임 점수를 수정합니다.",
+      "tags": [
+        "Games"
+      ],
+      "parameters": [
+        {
+          "name": "clubId",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "게임 점수 수정 성공"
+        }
+      ]
+    },
+    {
+      "id": "b4274e33-1be4-4176-b069-04b5fd623ca9",
+      "method": "PATCH",
+      "path": "//games/scores/{scoreId}",
+      "summary": "게임 점수 삭제",
+      "description": "게임 점수를 삭제합니다.",
+      "tags": [
+        "Games"
+      ],
+      "parameters": [
+        {
+          "name": "scoreId",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "게임 점수 삭제 성공"
+        }
+      ]
+    },
+    {
+      "id": "908b724f-3b3e-4e2e-8293-54cca4162e39",
+      "method": "DELETE",
+      "path": "//games/scores/{scoreId}",
+      "summary": "",
+      "description": "",
+      "tags": [
+        "Games"
+      ],
+      "parameters": [
+        {
+          "name": "scoreId",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "OK"
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-05-15T08:29:49.719Z",
+  "updatedAt": "2026-05-15T08:29:49.720Z"
+}

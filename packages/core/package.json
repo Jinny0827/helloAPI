@@ -1,0 +1,16 @@
+{
+  "name": "@helloapi/core",
+  "version": "1.0.0",
+  "description": "Core models and parsers",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.4",
+    "typescript": "^5.4.0"
+  }
+}

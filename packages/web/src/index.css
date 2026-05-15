@@ -1,0 +1,56 @@
+:root {
+    --color-bg: #0f1117;
+    --color-surface: #1a1d27;
+    --color-surface-2: #22263a;
+    --color-border: #2e3248;
+    --color-text: #e8eaf6;
+    --color-text-secondary: #8b90b0;
+    --color-primary: #6c7bff;
+    --color-primary-hover: #8591ff;
+    --color-success: #4caf82;
+    --color-warning: #f0a04b;
+    --color-danger: #e05c5c;
+    --color-get: #4caf82;
+    --color-post: #6c7bff;
+    --color-put: #f0a04b;
+    --color-patch: #4db8c8;
+    --color-delete: #e05c5c;
+    --radius: 8px;
+    --radius-lg: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', system-ui, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+input, textarea, select, button {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 3px;
+}
