@@ -14,7 +14,9 @@
       "Bash(aws s3 *)",
       "Bash(aws cloudfront *)",
       "Bash(node -e \"const d=JSON.parse\\(require\\('fs'\\).readFileSync\\('/dev/stdin','utf-8'\\)\\); d.DistributionList.Items.forEach\\(i=>console.log\\(i.Id, i.DomainName, i.Aliases.Items\\)\\)\")",
-      "Bash(pnpm --filter @helloapi/web build)"
+      "Bash(pnpm --filter @helloapi/web build)",
+      "Bash(aws sts *)",
+      "Bash(aws configure *)"
     ]
   }
 }
