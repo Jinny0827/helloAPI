@@ -1,4 +1,4 @@
-import { Endpoint } from '../types'
+import type { Endpoint } from '../types'
 import { extractPathParams } from '../utils'
 
 export interface ValidationError {

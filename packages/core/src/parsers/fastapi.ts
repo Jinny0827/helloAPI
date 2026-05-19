@@ -1,4 +1,4 @@
-import { Endpoint, HttpMethod, Parameter, ParameterType } from '../types'
+import type { Endpoint, HttpMethod, Parameter, ParameterType } from '../types'
 import { generateId, normalizeTag } from '../utils'
 
 // FastAPI 파일 내용을 엔드포인트 목록으로 변환

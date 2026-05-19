@@ -1,4 +1,4 @@
-import { Endpoint, HttpMethod, Parameter } from '../types'
+import type { Endpoint, HttpMethod, Parameter } from '../types'
 import { generateId, normalizePath, extractPathParams } from '../utils'
 
 // curl 문자열을 엔드포인트로 변환
@@ -7,7 +7,7 @@ export const parseCurl = (curl: string): Endpoint => {
 
     const method = parseMethod(cleaned)
     const url = parseUrl(cleaned)
-    const { path, baseUrl } = parsePath(url)
+    const { path } = parsePath(url)
     const headers = parseHeaders(cleaned)
     const queryParams = parseQueryParams(url)
     const body = parseBody(cleaned)

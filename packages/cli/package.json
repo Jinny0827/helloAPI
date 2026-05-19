@@ -1,20 +1,37 @@
 {
-  "name": "@helloapi/cli",
-  "version": "1.0.0",
-  "description": "CLI scanner for API Spec Explorer",
+  "name": "helloapi-scanner",
+  "version": "1.0.4",
+  "description": "CLI scanner for API Spec Explorer — scan Spring/FastAPI/NestJS and export spec.json",
   "type": "module",
   "bin": {
-    "helloapi": "./src/index.ts"
+    "helloapi": "./dist/index.js"
   },
   "scripts": {
-    "start": "tsx src/index.ts"
+    "start": "tsx src/index.ts",
+    "build": "tsup src/index.ts --format esm --out-dir dist",
+    "prepublishOnly": "pnpm build"
   },
-  "dependencies": {
-    "@helloapi/core": "workspace:*"
-  },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
+    "@helloapi/core": "workspace:*",
     "@types/node": "^25.7.0",
+    "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "api",
+    "spec",
+    "spring",
+    "fastapi",
+    "nestjs",
+    "express",
+    "cli"
+  ],
+  "license": "MIT"
 }

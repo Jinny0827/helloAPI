@@ -1,4 +1,4 @@
-import { Endpoint, HttpMethod, Parameter, ParameterType } from '../types'
+import type { Endpoint, HttpMethod, Parameter, ParameterType } from '../types'
 import { generateId, extractPathParams, normalizeTag } from '../utils'
 
 // NestJS 컨트롤러 파일 내용을 엔드포인트 목록으로 변환
@@ -157,7 +157,7 @@ const splitParams = (signature: string): string[] => {
 // ex) @Query('name') name: string → query 파라미터
 // ex) @Headers('authorization') auth: string → header 파라미터
 // ex) @Body() body: CreateUserDto → requestBody
-const parseParam = (param: string, pathParams: string[]): Parameter | null => {
+const parseParam = (param: string, _pathParams: string[]): Parameter | null => {
     // @Body() → requestBody로 별도 처리
     if (param.includes('@Body(')) return null
 

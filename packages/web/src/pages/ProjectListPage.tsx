@@ -45,8 +45,10 @@ export default function ProjectListPage({ onSelectProject }: Props) {
         const blob = new Blob([json], { type: 'application/json' })
         const url = URL.createObjectURL(blob)
         const a = document.createElement('a')
+        const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, '')
+        const safeTitle = project.info.title.replace(/[^\w가-힣-]/g, '_')
         a.href = url
-        a.download = `${project.info.title}_spec.json`
+        a.download = `${safeTitle}_${dateStr}_spec.json`
         a.click()
         URL.revokeObjectURL(url)
     }
@@ -80,20 +82,21 @@ export default function ProjectListPage({ onSelectProject }: Props) {
             <div style={styles.cliBox}>
                 <p style={styles.cliTitle}>🔍 코드에서 자동으로 import하기</p>
                 <p style={styles.cliDesc}>
-                    Spring / FastAPI / NestJS 프로젝트라면 CLI로 자동 추출할 수 있어요.
+                    Spring / FastAPI / NestJS / Express / Flask 프로젝트라면 CLI로 자동 추출할 수 있어요.
                 </p>
                 <div style={styles.cliSteps}>
                     <div style={styles.cliStep}>
                         <span style={styles.cliStepNum}>1</span>
-                        <code style={styles.cliCode}>npx helloapi scan ./src</code>
+                        <code style={styles.cliCode}>npx helloapi-scanner scan</code>
+                        <span style={styles.cliStepDesc}>프로젝트 루트에서 실행</span>
                     </div>
                     <div style={styles.cliStep}>
                         <span style={styles.cliStepNum}>2</span>
-                        <span style={styles.cliStepDesc}>생성된 spec.json을 위 import 버튼으로 불러오기</span>
+                        <span style={styles.cliStepDesc}>생성된 <code style={styles.cliCodeInline}>프로젝트명_날짜_spec.json</code>을 위 import 버튼으로 불러오기</span>
                     </div>
                 </div>
                 <p style={styles.cliNote}>
-                    Express / Netty 등 어노테이션이 없는 프레임워크는 OpenAPI JSON 또는 curl로 import하세요.
+                    OpenAPI JSON(Swagger) 또는 curl 명령어로도 import할 수 있어요.
                 </p>
             </div>
 
@@ -289,6 +292,15 @@ const styles: Record<string, React.CSSProperties> = {
         color: 'var(--color-text-secondary)',
         borderTop: '1px solid var(--color-border)',
         paddingTop: 12,
+    },
+    cliCodeInline: {
+        background: 'var(--color-surface-2)',
+        border: '1px solid var(--color-border)',
+        borderRadius: 'var(--radius)',
+        padding: '1px 6px',
+        fontFamily: 'monospace',
+        fontSize: 12,
+        color: 'var(--color-primary)',
     },
     grid: {
         display: 'grid',
