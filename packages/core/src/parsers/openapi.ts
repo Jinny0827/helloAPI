@@ -1,4 +1,4 @@
-import { Project, Endpoint, Parameter, Response, HttpMethod, ParameterType } from '../types'
+import type { Project, Endpoint, Parameter, Response, HttpMethod, ParameterType } from '../types'
 import { generateId, now, extractPathParams, normalizeTag } from '../utils'
 
 // OpenAPI 2.0 / 3.x JSON을 내부 모델로 변환

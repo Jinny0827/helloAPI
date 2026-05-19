@@ -1,5 +1,6 @@
-import { Project } from '../types'
-import { validateEndpoint, ValidationError, ValidationResult } from './endpoint'
+import type { Project } from '../types'
+import { validateEndpoint } from './endpoint'
+import type { ValidationError, ValidationResult } from './endpoint'
 
 export interface ProjectValidationResult {
     valid: boolean

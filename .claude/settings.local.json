@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(aws configure get region)",
+      "Bash(find C:/workspace/smart-budget-calendar/backend/src -name \"*.java\" -o -name \"*.controller.ts\" -o -name \"*.py\" 2>/dev/null | head -50)",
+      "Read(//c/workspace/smart-budget-calendar/**)",
+      "Read(//c/workspace/smart-budget-calendar/backend/**)",
+      "Bash(pnpm --filter helloapi-scanner build)",
+      "Read(//c/workspace/**)",
+      "Read(//c/workspace/finance-api/**)",
+      "Bash(node C:/workspace/helloAPI/packages/cli/dist/index.js scan ./app --framework=flask)",
+      "Bash(node -e \"const s=JSON.parse\\(require\\('fs'\\).readFileSync\\('C:/workspace/finance-api/spec.json','utf-8'\\)\\); s.endpoints.forEach\\(e=>console.log\\(e.method.padEnd\\(7\\), e.path.padEnd\\(20\\), '|', e.summary.slice\\(0,30\\), '| params:', e.parameters.map\\(p=>p.name+'\\('+p.in+'\\)'\\).join\\(', '\\)\\)\\)\")",
+      "Bash(node C:/workspace/helloAPI/packages/cli/dist/index.js scan)",
+      "Bash(aws s3 *)",
+      "Bash(aws cloudfront *)",
+      "Bash(node -e \"const d=JSON.parse\\(require\\('fs'\\).readFileSync\\('/dev/stdin','utf-8'\\)\\); d.DistributionList.Items.forEach\\(i=>console.log\\(i.Id, i.DomainName, i.Aliases.Items\\)\\)\")",
+      "Bash(pnpm --filter @helloapi/web build)"
+    ]
+  }
+}

@@ -26,6 +26,8 @@ export { parseCurl } from './parsers/curl'
 export { parseSpring } from './parsers/spring'
 export { parseFastAPI } from './parsers/fastapi'
 export { parseNestJS } from './parsers/nestjs'
+export { parseExpress, parseExpressBasePaths } from './parsers/express'
+export { parseFlask } from './parsers/flask'
 
 // 유효성 검사 export
 export { validateEndpoint } from './validators/endpoint'
