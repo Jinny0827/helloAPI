@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { useProjectStore } from '../store/projectStore'
 import { importFromFile } from '../utils/importSpec'
+import { sampleProject } from '../data/sampleProject.ts'
 import type { Project } from '@helloapi/core'
 
 interface Props {
@@ -53,6 +54,11 @@ export default function ProjectListPage({ onSelectProject }: Props) {
         URL.revokeObjectURL(url)
     }
 
+    const handleLoadSample = () => {
+        importProject(sampleProject)
+        onSelectProject(sampleProject.id)
+    }
+
     return (
         <div style={styles.container}>
             {/* 헤더 */}
@@ -102,7 +108,8 @@ export default function ProjectListPage({ onSelectProject }: Props) {
 
             {/* 프로젝트 목록 */}
             {projects.length === 0 ? (
-                <EmptyState onCreate={handleCreate} onImport={() => fileInputRef.current?.click()} />
+                <EmptyState onCreate={handleCreate} onImport={() => fileInputRef.current?.click()}
+                onLoadSample={handleLoadSample}/>
             ) : (
                 <div style={styles.grid}>
                     {projects.map(project => (
@@ -164,9 +171,11 @@ export default function ProjectListPage({ onSelectProject }: Props) {
 function EmptyState({
                         onCreate,
                         onImport,
+                        onLoadSample,
                     }: {
     onCreate: () => void
     onImport: () => void
+    onLoadSample: () => void
 }) {
     return (
         <div style={styles.empty}>
@@ -176,6 +185,7 @@ function EmptyState({
             <div style={styles.emptyActions}>
                 <button style={styles.btnPrimary} onClick={onCreate}>+ 새 프로젝트</button>
                 <button style={styles.btnSecondary} onClick={onImport}>import</button>
+                <button style={styles.btnSecondary} onClick={onLoadSample}>샘플 불러오기</button>
             </div>
         </div>
     )
