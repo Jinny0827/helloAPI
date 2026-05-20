@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useProjectStore } from '../store/projectStore'
 import { exportXlsx } from '../utils/exportXlsx'
 import { validateProject } from '@helloapi/core'
+import { exportOpenAPI } from '../utils/exportOpenAPI'
 import EndpointList from '../components/EndpointList'
 import EndpointForm from '../components/EndpointForm'
 import ApiTester from '../components/ApiTester'
@@ -89,6 +90,9 @@ export default function ProjectDetailPage({ onBack }: Props) {
                 <div style={styles.headerRight}>
                     <button style={styles.btnSecondary} onClick={handleAddEndpoint}>
                         + 엔드포인트
+                    </button>
+                    <button style={styles.btnSecondary} onClick={() => exportOpenAPI(project)}>
+                        OpenAPI
                     </button>
                     <button style={styles.btnPrimary} onClick={handleExport}>
                         xlsx 출력
