@@ -1,119 +1,101 @@
-# 🔍 HelloAPI — API Spec Explorer
+# 🛠️ nginx-devops-study
 
-API 명세를 입력받아 xlsx 문서로 출력하고, 파라미터를 입력해 실제 API를 즉시 테스트할 수 있는 도구입니다.  
-내부 데이터 모델은 OpenAPI 스펙 구조 기반으로 설계되어, 추후 기능 추가 시 레이어 추가만으로 대응 가능합니다.
-
-🌐 **서비스 URL**: [helloapi.bowling-manager.com](https://helloapi.bowling-manager.com)
+DevOps 관점에서 nginx를 활용한 현대적 웹 인프라 구축을 실습하는 스터디 레포입니다.  
+이론(노션) + 실습(GitHub) 병행 방식으로 진행하며, 4주 커리큘럼으로 구성됩니다.
 
 ---
 
-## 📌 주요 기능
+## 🎯 학습 목표
 
-### 입력 방식 (4가지)
-| 우선순위 | 방식 | 대상 |
-|---|---|---|
-| 1 | CLI 코드 파싱 → spec.json import | Spring / FastAPI / NestJS / Express / Flask |
-| 2 | OpenAPI JSON import | 이미 문서화된 프로젝트 |
-| 3 | curl 붙여넣기 | 문서 없는 프로젝트, 외부 API |
-| 4 | 수동 직접 입력 | 신규 설계 단계 |
-
-### 출력 기능
-- **xlsx 출력**: 메서드별 컬러, 태그별 시트 분리, 블록 구조
-- **OpenAPI 3.0 JSON 출력**: Swagger UI / Postman / Insomnia 바로 import 가능
-- **API 테스트**: 파라미터 자동 폼 생성 → 실제 HTTP 요청 실행 → 응답 확인
+- Infrastructure as Code: 모든 인프라 설정을 코드로 관리
+- 자동화: 배포, 테스트, 모니터링 자동화
+- 관찰가능성: 시스템 상태 실시간 파악
+- 보안: 다층 보안 체계 구축
+- 확장성: 트래픽 증가에 대응 가능한 구조
 
 ---
 
-## 🏗️ 서비스 구조
+## 🗓️ 주차별 커리큘럼
+
+### 1주차 — Infrastructure as Code 기초
+```
+week1-infrastructure-setup/
+├── scripts/
+│   ├── macos-setup.sh        # 전체 환경 자동 설정
+│   ├── nginx-install.sh      # nginx 설치 자동화
+│   └── initial-config.sh     # 기본 설정 적용
+├── configs/
+│   ├── nginx.conf            # 메인 설정 파일
+│   └── default.conf          # 기본 서버 블록
+└── tests/
+    └── basic-test.py         # 기본 동작 테스트
+```
+
+### 2주차 — 서비스 디스커버리 & 로깅 인프라
+```
+week2-service-management/
+├── sites/                    # 멀티 사이트 설정
+├── logging/                  # 커스텀 로그 포맷, 분석
+└── monitoring/               # 서비스 상태, 업타임 모니터링
+```
+
+### 3주차 — CI/CD Pipeline & 보안 자동화
+```
+week3-cicd-security/
+├── nginx-configs/            # 리버스 프록시, SSL, API Gateway
+├── security/                 # SSL 인증서, Rate Limiting, 보안 헤더
+├── deployment/               # 무중단 배포, 롤백 스크립트
+└── docker/                   # Docker Compose 기반 배포
+```
+
+### 4주차 — Production-Ready 인프라
+```
+week4-production-ready/
+├── load-balancing/           # 로드 밸런서, 헬스체크, 장애 복구
+├── performance/              # 캐시, Gzip/Brotli 압축, 워커 튜닝
+├── monitoring/               # Prometheus, Grafana, ELK Stack
+└── testing/                  # 부하 테스트(K6), 보안 테스트, E2E 테스트
+```
+
+---
+
+## 🏗️ 최종 아키텍처
 
 ```
-[CLI] 프로젝트 폴더 스캔 → 프로젝트명_날짜_spec.json 생성
-[웹앱] spec.json import → 명세 확인 / 수정 / xlsx 출력 / OpenAPI 출력 / API 테스트
-```
-
-**아키텍처 레이어**
-```
-입력 (OpenAPI JSON / curl / 수동 / spec.json)
+[Internet]
     ↓
-내부 데이터 모델 (OpenAPI 구조 기반)
+[nginx Load Balancer + SSL Termination]
     ↓
-┌──────────────┬──────────────┬──────────────────┐
-xlsx 출력     API 테스트    OpenAPI JSON 출력
-```
-
-**패키지 구조 (모노레포)**
-```
-helloAPI/
-├── packages/
-│   ├── core/     # 내부 데이터 모델, 파서, 유효성 검사 (웹앱 + CLI 공유)
-│   ├── web/      # React 웹앱
-│   └── cli/      # Node.js CLI (npm: helloapi-scanner)
+[nginx Reverse Proxy + API Gateway]
+    ↓
+[Microservices (Docker)]
+    ↓
+[Monitoring Stack (Prometheus + Grafana)]
+    ↓
+[Logging Pipeline (ELK)]
+    ↓
+[Backup & Recovery System]
 ```
 
 ---
 
-## 🛠️ 기술 스택
+## 🛠️ 도구 스택
 
-### 웹앱
-| 항목 | 기술 |
+| 분류 | 도구 |
 |---|---|
-| Framework | React + Vite |
-| 상태관리 | Zustand |
-| xlsx 생성 | xlsx-js-style |
-| HTTP 테스트 | fetch API |
-
-### CLI
-| 항목 | 기술 |
-|---|---|
-| Runtime | Node.js |
-| Language | TypeScript |
-| 번들러 | tsup |
-| 배포 | npm registry (npx 실행) |
-| 파일 파싱 | 정규식 직접 구현 |
-
-### 배포
-| 대상 | 방식 |
-|---|---|
-| 웹앱 | S3 + CloudFront |
-| CLI | npm registry |
-
-**CI/CD**: GitHub Actions → main 푸시 시 자동 빌드 → S3 sync → CloudFront 캐시 무효화
+| 웹서버 | nginx |
+| 컨테이너 | Docker |
+| 모니터링 | Prometheus + Grafana |
+| 로그 분석 | ELK Stack |
+| 성능 테스트 | Artillery / K6 |
+| 보안 테스트 | OWASP ZAP |
+| IaC | Terraform |
+| 오케스트레이션 | Kubernetes |
 
 ---
 
-## 🖥️ CLI 사용법
+## 📝 기여 가이드라인
 
-```bash
-# 프로젝트 루트에서 실행
-npx helloapi-scanner scan
-
-# 생성된 spec.json을 웹앱에서 import
-# → 명세 확인 후 xlsx 출력 또는 API 테스트
-```
-
-**지원 프레임워크**
-| 프레임워크 | 파싱 대상 |
-|---|---|
-| Spring | @GetMapping, @RequestParam, @PathVariable, @RequestBody |
-| FastAPI | @app.get, 타입힌트, Query() |
-| NestJS | @Get, @Param, @Query, @Body |
-| Express | router.get/post 등 라우트 파일 |
-| Flask | @bp.route, request.args.get(), Blueprint |
-
----
-
-## 📋 xlsx 출력 스펙
-
-- 태그별 시트 분리 (태그 없는 엔드포인트 → `General` 시트)
-- 메서드별 배경색: GET(초록) / POST(파랑) / PUT(주황) / PATCH(보라) / DELETE(빨강)
-- 400 이상 응답 코드 빨간색 강조
-
----
-
-## 🚧 TODO
-
-- [ ] CORS 프록시 서버 (Lambda)
-- [ ] 응답 스키마 정의 (중첩 객체, $ref)
-- [ ] 서버 / Auth 설정 UI
-- [ ] 계정 / 인증 도입 (현재 localStorage 기반)
-- [ ] 국민/신한 카드 파서 추가
+1. 모든 설정 파일은 주석과 함께 작성
+2. 스크립트는 실행 전 검증 단계 포함
+3. 테스트 코드 필수 작성
