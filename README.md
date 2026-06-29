@@ -1,101 +1,173 @@
-# 🛠️ nginx-devops-study
+# 👟 foot_measure — 발 측정 기반 신발 추천 서비스
 
-DevOps 관점에서 nginx를 활용한 현대적 웹 인프라 구축을 실습하는 스터디 레포입니다.  
-이론(노션) + 실습(GitHub) 병행 방식으로 진행하며, 4주 커리큘럼으로 구성됩니다.
+스마트폰 카메라 2장(위 + 옆)으로 발 형태를 분석하고, 신발 사이즈 및 타입을 추천하는 웹 서비스입니다.
 
----
+🌐 **서비스 URL**: [budget.bowling-manager.com/foot-measure](https://budget.bowling-manager.com/foot-measure)
 
-## 🎯 학습 목표
-
-- Infrastructure as Code: 모든 인프라 설정을 코드로 관리
-- 자동화: 배포, 테스트, 모니터링 자동화
-- 관찰가능성: 시스템 상태 실시간 파악
-- 보안: 다층 보안 체계 구축
-- 확장성: 트래픽 증가에 대응 가능한 구조
+> ⚠️ 본 서비스는 참고용 측정 도구입니다. 의학적 진단을 목적으로 하지 않습니다.
 
 ---
 
-## 🗓️ 주차별 커리큘럼
+## 📌 주요 기능
 
-### 1주차 — Infrastructure as Code 기초
-```
-week1-infrastructure-setup/
-├── scripts/
-│   ├── macos-setup.sh        # 전체 환경 자동 설정
-│   ├── nginx-install.sh      # nginx 설치 자동화
-│   └── initial-config.sh     # 기본 설정 적용
-├── configs/
-│   ├── nginx.conf            # 메인 설정 파일
-│   └── default.conf          # 기본 서버 블록
-└── tests/
-    └── basic-test.py         # 기본 동작 테스트
-```
+### Step 1 — 위에서 촬영 (발 길이 / 발볼)
+- A4 용지 실제 감지 (HSV 흰색 마스크 + 비율 검증)
+- 흰 바닥 환경 자동 구별 → 원인별 에러 메시지 반환
+- 발 길이 / 발볼 너비 측정 (mm 단위)
+- 결과 이미지 시각화 (측정선 포함)
 
-### 2주차 — 서비스 디스커버리 & 로깅 인프라
-```
-week2-service-management/
-├── sites/                    # 멀티 사이트 설정
-├── logging/                  # 커스텀 로그 포맷, 분석
-└── monitoring/               # 서비스 상태, 업타임 모니터링
-```
+### Step 2 — 옆에서 촬영 (아치)
+- 피부색 감지 기반 발 인식 → 셔터 자동 활성화
+- 아치 높이 측정 (mm)
+- 평발 등급 분류: 평발 / 저아치 / 정상 / 높은 아치
 
-### 3주차 — CI/CD Pipeline & 보안 자동화
-```
-week3-cicd-security/
-├── nginx-configs/            # 리버스 프록시, SSL, API Gateway
-├── security/                 # SSL 인증서, Rate Limiting, 보안 헤더
-├── deployment/               # 무중단 배포, 롤백 스크립트
-└── docker/                   # Docker Compose 기반 배포
-```
+### 결과 화면
+- 위 / 옆 사진 나란히 표시
+- 신발 사이즈 추천 (KR mm 기준)
+- 발볼 핏 분류: 슬림 / 보통 / 와이드
+- 아치 등급별 신발 타입 + 인솔 추천
 
-### 4주차 — Production-Ready 인프라
+---
+
+## 🏗️ 배포 구조
+
 ```
-week4-production-ready/
-├── load-balancing/           # 로드 밸런서, 헬스체크, 장애 복구
-├── performance/              # 캐시, Gzip/Brotli 압축, 워커 튜닝
-├── monitoring/               # Prometheus, Grafana, ELK Stack
-└── testing/                  # 부하 테스트(K6), 보안 테스트, E2E 테스트
+프론트 (React)
+└─ S3 + CloudFront
+      budget.bowling-manager.com/foot-measure
+
+백엔드 (Flask)
+└─ API Gateway
+      └─ Lambda (python3.11 / 1024MB / 60s)
+            ├─ POST /measure        위에서 촬영
+            └─ POST /measure/side   옆에서 촬영
 ```
 
 ---
 
-## 🏗️ 최종 아키텍처
+## 🛠️ 기술 스택
 
-```
-[Internet]
-    ↓
-[nginx Load Balancer + SSL Termination]
-    ↓
-[nginx Reverse Proxy + API Gateway]
-    ↓
-[Microservices (Docker)]
-    ↓
-[Monitoring Stack (Prometheus + Grafana)]
-    ↓
-[Logging Pipeline (ELK)]
-    ↓
-[Backup & Recovery System]
-```
-
----
-
-## 🛠️ 도구 스택
-
-| 분류 | 도구 |
+| 영역 | 기술 |
 |---|---|
-| 웹서버 | nginx |
-| 컨테이너 | Docker |
-| 모니터링 | Prometheus + Grafana |
-| 로그 분석 | ELK Stack |
-| 성능 테스트 | Artillery / K6 |
-| 보안 테스트 | OWASP ZAP |
-| IaC | Terraform |
-| 오케스트레이션 | Kubernetes |
+| 백엔드 | Python + Flask + OpenCV |
+| 이미지 처리 | OpenCV (HSV 마스킹, A4 감지, 형태학적 연산) |
+| 프론트엔드 | React + TypeScript + Vite |
+| 백엔드 배포 | AWS Lambda (SAM CLI) + API Gateway |
+| 프론트 배포 | S3 + CloudFront |
 
 ---
 
-## 📝 기여 가이드라인
+## 📁 프로젝트 구조
 
-1. 모든 설정 파일은 주석과 함께 작성
-2. 스크립트는 실행 전 검증 단계 포함
-3. 테스트 코드 필수 작성
+```
+foot_measure/                    # 백엔드
+├─ app/
+│   ├─ measure.py               # 핵심 이미지 처리 로직
+│   └─ routes.py                # API 엔드포인트
+├─ main.py                      # Lambda 핸들러 (aws-wsgi)
+├─ requirements.txt
+└─ template.yaml                # SAM 배포 설정
+```
+
+---
+
+## 📡 API 엔드포인트
+
+| 메서드 | 경로 | 설명 |
+|---|---|---|
+| GET | /health | 서버 상태 확인 |
+| POST | /measure | 위에서 촬영 — 발 길이 / 발볼 측정 |
+| POST | /measure/side | 옆에서 촬영 — 아치 높이 측정 |
+
+### POST /measure 응답
+```json
+{
+  "발 길이 (mm)": 255.3,
+  "발 길이 (cm)": 25.5,
+  "발볼 너비 (mm)": 98.1,
+  "발볼 너비 (cm)": 9.8,
+  "result_image": "base64 JPEG..."
+}
+```
+
+### POST /measure/side 응답
+```json
+{
+  "arch_height_mm": 18.4,
+  "arch_level": "정상",
+  "arch_score": 2,
+  "result_image": "base64 JPEG..."
+}
+```
+
+---
+
+## 🔬 핵심 알고리즘
+
+### A4 감지 알고리즘
+1. 가이드박스 ROI 추출 (±여유 20px)
+2. HSV 흰색 마스크 (V > 175, S < 60)
+3. MORPH_CLOSE (25×25, 3회) — 발이 덮은 구멍 채우기
+4. MORPH_OPEN (9×9, 1회) — 노이즈 제거
+5. white_ratio > 78% → 흰 바닥 에러
+6. 면적 5% 이상 흰색 영역 수집 → minAreaRect
+7. 비율 검증 (210:297 ± 25%)
+8. pixel_per_mm 계산
+
+### 신발 추천 로직 (프론트 자체 계산)
+```
+발볼 비율 = 발볼너비 / 발길이
+  < 0.37      → 슬림
+  0.37~0.41   → 보통
+  > 0.41      → 와이드
+
+신발 사이즈 = ceil((발길이 + 10mm) / 5) × 5
+
+아치 등급별 추천:
+  평발    → 모션 컨트롤 슈즈 + 높은 아치 지지 인솔
+  저아치  → 스태빌리티 슈즈 + 미디엄 아치 지지 인솔
+  정상    → 뉴트럴 슈즈 + 기본 쿠셔닝 인솔
+  높은아치 → 쿠셔닝 슈즈 + 충격 흡수 인솔
+```
+
+---
+
+## 🚀 로컬 실행
+
+### 백엔드
+```bash
+cd foot_measure
+python -m venv venv
+venv\Scripts\activate      # Windows
+pip install -r requirements.txt
+python main.py
+```
+
+### 배포
+```bash
+# 백엔드 (SAM)
+sam build
+sam deploy
+
+# 프론트엔드
+.\deploy.ps1 frontend
+```
+
+---
+
+## 🔑 환경변수
+
+```env
+# 프론트엔드
+VITE_FOOT_API_URL=http://127.0.0.1:5000/measure   # 로컬
+```
+
+---
+
+## 🚧 TODO
+
+- [ ] RunRepeat 크롤러 (Playwright — 신발 DB 수집, 주 1회 배치)
+- [ ] `/recommend` 매칭 API (아치 등급 + 발볼 비율 기반 상위 10개 반환)
+- [ ] 원근 보정 (4점 Perspective Transform) — 발 길이 오차 개선
+- [ ] 회원 시스템 (측정 이력 저장)
+- [ ] A4 감지 실패 시 Claude Vision API fallback
