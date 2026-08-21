@@ -16,7 +16,9 @@
       "Bash(node -e \"const d=JSON.parse\\(require\\('fs'\\).readFileSync\\('/dev/stdin','utf-8'\\)\\); d.DistributionList.Items.forEach\\(i=>console.log\\(i.Id, i.DomainName, i.Aliases.Items\\)\\)\")",
       "Bash(pnpm --filter @helloapi/web build)",
       "Bash(aws sts *)",
-      "Bash(aws configure *)"
+      "Bash(aws configure *)",
+      "Bash(xargs grep -l \"Controller\\\\|@RequestMapping\\\\|ChannelHandler\\\\|SimpleChannelInbound\\\\|@GET\\\\|@POST\\\\|@Path\")",
+      "Bash(xargs grep -l \"BrowserRouter\\\\|RouterProvider\\\\|createBrowserRouter\")"
     ]
   }
 }

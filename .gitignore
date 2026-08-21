@@ -3,3 +3,6 @@ dist/
 .DS_Store
 *.local
 .env
+
+# CloudFront config dumps (contain distribution/bucket details)
+cf-*
